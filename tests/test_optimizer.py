@@ -37,6 +37,11 @@ class TestTokenOptimizer:
         result = self.optimizer.compress_punctuation("واقعا؟؟؟")
         assert result == "واقعا؟"
     
+    def test_compress_mixed_punctuation(self):
+        """Mixed question and exclamation marks should be normalized."""
+        result = self.optimizer.compress_punctuation("واقعا!؟!؟")
+        assert result == "واقعا!؟"
+    
     def test_clean_spaces(self):
         """Multiple spaces should be collapsed."""
         result = self.optimizer.clean_spaces("سلام     دنیا")

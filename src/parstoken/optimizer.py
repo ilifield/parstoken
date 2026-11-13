@@ -179,7 +179,8 @@ class TokenOptimizer:
     def compress_punctuation(self, text: str) -> str:
         """Compress repeated punctuation marks.
         
-        Reduces patterns like '!!!' or '???' to single marks.
+        Reduces patterns like '!!!' or '???' to single marks,
+        and normalizes mixed sequences like '!؟!؟' to '!؟'.
         
         Args:
             text: Input text.
@@ -188,7 +189,11 @@ class TokenOptimizer:
             Text with compressed punctuation.
         """
         replacement = r'\1' * self.max_punctuation_repeat
-        return self._repeated_punctuation_re.sub(replacement, text)
+        text = self._repeated_punctuation_re.sub(replacement, text)
+        
+        # Compress mixed exclamation and question marks (e.g., !؟!؟ -> !؟)
+        text = re.sub(r'(![؟?]|[؟?]!){2,}', r'!؟', text)
+        return text
     
     def clean_spaces(self, text: str) -> str:
         """Remove redundant spaces and fix spacing around punctuation.
