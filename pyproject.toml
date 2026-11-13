@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "parstoken"
+version = "0.1.0"
+description = "Persian text preprocessing and LLM token optimization toolkit"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Iliya Sharifi", email = "sharifiiliya118@gmail.com"},
+    {name = "Parstoken Contributors"},
+]
+keywords = [
+    "persian", "farsi", "nlp", "text-processing", "tokenization",
+    "llm", "gpt", "text-normalization", "rtl", "unicode",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Text Processing",
+    "Topic :: Text Processing :: Linguistic",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Natural Language :: Persian",
+]
+
+[project.urls]
+Homepage = "https://github.com/ilifield/parstoken"
+Documentation = "https://github.com/ilifield/parstoken#readme"
+Repository = "https://github.com/ilifield/parstoken"
+Issues = "https://github.com/ilifield/parstoken/issues"
+Changelog = "https://github.com/ilifield/parstoken/blob/main/CHANGELOG.md"
+
+[project.scripts]
+parstoken = "parstoken.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/parstoken"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "D", "UP"]
+ignore = ["D100", "D104"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
